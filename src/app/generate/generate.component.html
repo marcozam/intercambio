@@ -1,28 +1,70 @@
-<mat-form-field class="example-chip-list" appearance="fill">
-  <mat-label>Favorite Fruits</mat-label>
-  <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
-      {{ fruit }}
-      <button matChipRemove>
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
+<!-- PASO 1 -->
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label> ¿Quienes participan? </mat-label>
     <input
-      placeholder="New fruit..."
-      #fruitInput
-      [formControl]="fruitCtrl"
-      [matAutocomplete]="auto"
+      matInput
+      #participantInput
+      [formControl]="nombreParticipanteCtrl"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)"
     />
-  </mat-chip-list>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-      {{ fruit }}
-    </mat-option>
-  </mat-autocomplete>
+  </mat-form-field>
+</div>
+<mat-chip-list #chipList cdkDropList [cdkDropListData]="participantes">
+  <mat-chip
+    *ngFor="let participante of participantes"
+    cdkDrag
+    (removed)="remove(participante)"
+  >
+    {{ participante }}
+
+    <button matChipRemove>
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-chip>
+</mat-chip-list>
+<!-- PASO 2 -->
+<h3>¿Quieres hacer grupos?</h3>
+<p>
+  Los grupos permiten que las personas del mismo grupo no se regalen entre
+  ellos.
+</p>
+<mat-form-field appearance="fill">
+  <mat-label> ¿Familias que participan? </mat-label>
+  <input
+    matInput
+    [ngModel]="numeroGrupos"
+    (ngModelChange)="familyCountChanged($event)"
+  />
 </mat-form-field>
+<div cdkDropListGroup>
+  <div class="group-container">
+    <div
+      *ngFor="let g of grupos"
+      class="group"
+      cdkDropList
+      [cdkDropListData]="g.participantes"
+      (cdkDropListDropped)="drop($event)"
+    >
+      {{ g.nombre }}
+      <mat-chip-list ariaOrientation="vertical">
+        <mat-chip
+          *ngFor="let participante of g.participantes"
+          cdkDrag
+          (removed)="remove(participante)"
+        >
+          {{ participante }}
+
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
 
 <div *ngFor="let p of assignacion" class="row" [class.red]="p.from === p.to">
   <div class="name-box">

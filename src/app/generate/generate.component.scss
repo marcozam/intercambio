@@ -1,0 +1,32 @@
+.group {
+  border: solid 1px #000;
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 200px;
+  max-width: 300px;
+  min-height: 200px;
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+}
+
+.mat-chip-list {
+  margin-bottom: 8px;
+}
+
+.red {
+    color: red;
+  }
+  
+  .row {
+    border: solid 1px #000;
+    padding: 5px;
+  }
+  
+  .name-box {
+    width: 200px;
+    display: inline-block;
+  }

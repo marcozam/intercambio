@@ -1,3 +1,4 @@
+@use "@angular/material" as mat;
 /* You can add global styles to this file, and also import other style files */
 
 html,
@@ -7,4 +8,21 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background-color: #303030;
 }
+
+@include mat.core();
+
+// Define a dark theme
+$dark-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$purple-palette),
+      accent: mat.define-palette(mat.$green-palette),
+    ),
+  )
+);
+
+// Apply the dark theme by default
+// @include mat.core-theme($dark-theme);
+@include mat.all-component-themes($dark-theme);

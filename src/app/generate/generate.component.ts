@@ -1,11 +1,21 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  ViewChildren,
+} from "@angular/core";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { MatChipInputEvent } from "@angular/material/chips";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
 import { JSEncrypt } from "jsencrypt";
+import { Grupo } from "../models";
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from "@angular/cdk/drag-drop";
 
 export interface Fruit {
   name: string;
@@ -17,9 +27,6 @@ export interface Fruit {
   styleUrls: ["./generate.component.scss"],
 })
 export class GenerateComponent implements OnInit {
-  busqueda = false;
-  generar = !!localStorage.getItem("generar");
-  title = "intercambio";
   list = [
     ["Jaime Antonio", "Lupita"],
     ["Yesenia", "Carlos"],
@@ -29,13 +36,52 @@ export class GenerateComponent implements OnInit {
     ["Tia Lolita", "Toñito"],
     ["Chava"],
   ];
+
+  participantesLabel = "Participantes";
+
+  participantes: string[] = this.list.reduce(
+    (acc, curVal) => acc.concat(curVal),
+    []
+  );
+
+  numeroGrupos: number = 1;
+
+  grupos: Grupo[] = [];
+
+  @ViewChildren(".grupo") groupElements;
+
+  @ViewChild("participantInput") participantInput: ElementRef<HTMLInputElement>;
+
+  busqueda = false;
+  generar = !!localStorage.getItem("generar");
+  title = "intercambio";
   db =
     "Am6F5nsLESo0ZibZ2Jzd9kJs5p8h0Jc+88tdq/mwuzF+GxeUqGb/auEDwcGbqMah7eFiv64fbfw4hXAYc09h+qpEUBQqpPlZ5NXrNUG+7FA8TFSw4LDOCHRmj6YuhbdTB+GVXJ75O4DalNu9DX5OzFRjXGK+0RJUwZ+rT7mJp2o=#####BDW4qU+ENNfPEULOv1he4pgvBe3frIPg//41R5APGmuX5I03aZYaK4rwXzRn2Bin4KVrhV+M1RJYLbNrQbcIQsYfAeo4gv6xkyWYQDJSdx8HYeieeR8W5BYZRioK0dDpV0112XpcyXu8IySOkQRDD2LnQkjxf8e5T6+NmgyDbWM=#####0kg34nklNxli2IrOPw1U0tJEBNXPTXd+ElPryDWMN35UfSW9kFwMKsGPvMELEjK0s8xqCZ/ktBph7v+sw0j4rpzq1Lqk+hWeXWQKFO9RNJ83oBpAxQK3GF14UabpLX5jqPifb/QlT+ZQ+OKH0zG5ONfe6z9fAZPQo90pWIBWQuM=#####TBChi6cA2OKuhqgUTlDRr/QS3mKdcSZu12F7MjPOzsNTKYLfbooUYm8RnLtjQJ/6BdqsCwrAl8D20qp1kgbXEDBEQRaTEi+sopV3kYW9TsxIQgIkgh5TMaRwaQwOXhMknlqvwR9vLNVAlthlHxrMTeyrY9Q0gwNev/ZtWi4CwiY=";
   assignacion = [];
   item: { from: string; to: string };
 
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+    if (this.db) {
+      this.desencriptar();
+    }
+    this.generateGroups();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
   hasDuplicates(lista: { from: string; to: string }[]): boolean {
@@ -144,58 +190,46 @@ export class GenerateComponent implements OnInit {
   }
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ["Lemon"];
-  allFruits: string[] = ["Apple", "Lemon", "Lime", "Orange", "Strawberry"];
-
-  @ViewChild("fruitInput") fruitInput: ElementRef<HTMLInputElement>;
-
-  constructor() {
-    if (this.db) {
-      this.desencriptar();
-    }
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) =>
-        fruit ? this._filter(fruit) : this.allFruits.slice()
-      )
-    );
-  }
+  nombreParticipanteCtrl = new FormControl();
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || "").trim();
 
     // Add our fruit
     if (value) {
-      this.fruits.push(value);
+      this.participantes.push(value);
     }
 
     // Clear the input value
     event.chipInput!.clear();
 
-    this.fruitCtrl.setValue(null);
+    this.nombreParticipanteCtrl.setValue(null);
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.participantes.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.participantes.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = "";
-    this.fruitCtrl.setValue(null);
+    this.participantes.push(event.option.viewValue);
+    this.participantInput.nativeElement.value = "";
+    this.nombreParticipanteCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  familyCountChanged(familyCount: number) {
+    this.numeroGrupos = familyCount;
+    this.generateGroups();
+  }
 
-    return this.allFruits.filter((fruit) =>
-      fruit.toLowerCase().includes(filterValue)
-    );
+  private generateGroups() {
+    this.grupos = Array.from({ length: this.numeroGrupos }, (v, i) => ({
+      nombre: `Familia ${i + 1}`,
+      participantes: [],
+    }));
+    this.grupos[0].participantes = [...this.participantes];
   }
 }
