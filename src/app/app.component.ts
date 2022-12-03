@@ -1,52 +1,26 @@
-import { Component } from '@angular/core';
-import { JSEncrypt } from 'jsencrypt';
+import { Component } from "@angular/core";
+import { JSEncrypt } from "jsencrypt";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
   busqueda = false;
-  generar = !!localStorage.getItem('generar');
-  title = 'intercambio';
+  generar = !!localStorage.getItem("generar");
+  title = "intercambio";
   list = [
-    [
-      'Jaime Antonio',
-      'Lupita',
-    ],
-    [
-      'Yesenia',
-      'Carlos',
-    ],
-    [
-      'Yamileth',
-      'Mia',
-      'Marco Jr',
-      'Marco',
-    ],
-    [
-      'Loreni',
-      'Israel',
-      'Israel Jr',
-      'Mary',
-    ],
-    [
-      'Chelita',
-      'Julian',
-      'Julian Antonio',
-      'Zumey',
-      'Yuliana',
-    ],
-    [
-      'Tia Lolita',
-      'Toñito',
-    ],
-    [
-      'Chava'
-    ]
+    ["Jaime Antonio", "Lupita"],
+    ["Yesenia", "Carlos"],
+    ["Yamileth", "Mia", "Marco Jr", "Marco"],
+    ["Loreni", "Israel", "Israel Jr", "Mary"],
+    ["Chelita", "Julian", "Julian Antonio", "Zumey", "Yuliana"],
+    ["Tia Lolita", "Toñito"],
+    ["Chava"],
   ];
-  db = 'Am6F5nsLESo0ZibZ2Jzd9kJs5p8h0Jc+88tdq/mwuzF+GxeUqGb/auEDwcGbqMah7eFiv64fbfw4hXAYc09h+qpEUBQqpPlZ5NXrNUG+7FA8TFSw4LDOCHRmj6YuhbdTB+GVXJ75O4DalNu9DX5OzFRjXGK+0RJUwZ+rT7mJp2o=#####BDW4qU+ENNfPEULOv1he4pgvBe3frIPg//41R5APGmuX5I03aZYaK4rwXzRn2Bin4KVrhV+M1RJYLbNrQbcIQsYfAeo4gv6xkyWYQDJSdx8HYeieeR8W5BYZRioK0dDpV0112XpcyXu8IySOkQRDD2LnQkjxf8e5T6+NmgyDbWM=#####0kg34nklNxli2IrOPw1U0tJEBNXPTXd+ElPryDWMN35UfSW9kFwMKsGPvMELEjK0s8xqCZ/ktBph7v+sw0j4rpzq1Lqk+hWeXWQKFO9RNJ83oBpAxQK3GF14UabpLX5jqPifb/QlT+ZQ+OKH0zG5ONfe6z9fAZPQo90pWIBWQuM=#####TBChi6cA2OKuhqgUTlDRr/QS3mKdcSZu12F7MjPOzsNTKYLfbooUYm8RnLtjQJ/6BdqsCwrAl8D20qp1kgbXEDBEQRaTEi+sopV3kYW9TsxIQgIkgh5TMaRwaQwOXhMknlqvwR9vLNVAlthlHxrMTeyrY9Q0gwNev/ZtWi4CwiY=';
+  db =
+    "Am6F5nsLESo0ZibZ2Jzd9kJs5p8h0Jc+88tdq/mwuzF+GxeUqGb/auEDwcGbqMah7eFiv64fbfw4hXAYc09h+qpEUBQqpPlZ5NXrNUG+7FA8TFSw4LDOCHRmj6YuhbdTB+GVXJ75O4DalNu9DX5OzFRjXGK+0RJUwZ+rT7mJp2o=#####BDW4qU+ENNfPEULOv1he4pgvBe3frIPg//41R5APGmuX5I03aZYaK4rwXzRn2Bin4KVrhV+M1RJYLbNrQbcIQsYfAeo4gv6xkyWYQDJSdx8HYeieeR8W5BYZRioK0dDpV0112XpcyXu8IySOkQRDD2LnQkjxf8e5T6+NmgyDbWM=#####0kg34nklNxli2IrOPw1U0tJEBNXPTXd+ElPryDWMN35UfSW9kFwMKsGPvMELEjK0s8xqCZ/ktBph7v+sw0j4rpzq1Lqk+hWeXWQKFO9RNJ83oBpAxQK3GF14UabpLX5jqPifb/QlT+ZQ+OKH0zG5ONfe6z9fAZPQo90pWIBWQuM=#####TBChi6cA2OKuhqgUTlDRr/QS3mKdcSZu12F7MjPOzsNTKYLfbooUYm8RnLtjQJ/6BdqsCwrAl8D20qp1kgbXEDBEQRaTEi+sopV3kYW9TsxIQgIkgh5TMaRwaQwOXhMknlqvwR9vLNVAlthlHxrMTeyrY9Q0gwNev/ZtWi4CwiY=";
   assignacion = [];
   item: { from: string; to: string };
 
@@ -56,8 +30,8 @@ export class AppComponent {
     }
   }
 
-  hasDuplicates(lista: { from: string, to: string }[]): boolean {
-    return !!lista.find(item => item.to === item.from);
+  hasDuplicates(lista: { from: string; to: string }[]): boolean {
+    return !!lista.find((item) => item.to === item.from);
   }
 
   run() {
@@ -66,10 +40,12 @@ export class AppComponent {
   }
 
   desencriptar() {
-    const items = this.db.split('#####')
-      .map(row => this.encrypt(row, true)).join(';');
-    this.assignacion = items.split(';').map(item => {
-      const [from, to] = item.split('-');
+    const items = this.db
+      .split("#####")
+      .map((row) => this.encrypt(row, true))
+      .join(";");
+    this.assignacion = items.split(";").map((item) => {
+      const [from, to] = item.split("-");
       return { from, to };
     });
   }
@@ -80,11 +56,11 @@ export class AppComponent {
     while (a.length > 0) {
       chunk.push(a.splice(0, 5));
     }
-    const aStr = chunk.map(c =>
-      this.encrypt(
-        c.map(({ from, to }) => from + '-' + to)
-          .join(';'))
-    ).join('#####');
+    const aStr = chunk
+      .map((c) =>
+        this.encrypt(c.map(({ from, to }) => from + "-" + to).join(";"))
+      )
+      .join("#####");
     console.log(aStr);
   }
 
@@ -110,16 +86,16 @@ export class AppComponent {
     return encrypted ? enc.decrypt(value) : enc.encrypt(value);
   }
 
-  generate(): { from: string, to: string }[] {
+  generate(): { from: string; to: string }[] {
     const assignacion = [];
-    const flatSingle = arr => [].concat(...arr);
+    const flatSingle = (arr) => [].concat(...arr);
     let papelitos = flatSingle(this.list);
     this.list.forEach((grupo, idx) => {
-      grupo.forEach(name => {
-        const exPapelitos = papelitos.filter(p => !grupo.includes(p));
+      grupo.forEach((name) => {
+        const exPapelitos = papelitos.filter((p) => !grupo.includes(p));
         const to = this.getRandomName(name, exPapelitos);
-        assignacion.push({from: name, to });
-        papelitos = papelitos.filter(n => n !== to);
+        assignacion.push({ from: name, to });
+        papelitos = papelitos.filter((n) => n !== to);
       });
     });
     if (this.hasDuplicates(assignacion)) {
@@ -146,14 +122,16 @@ export class AppComponent {
 
   descubrir(name) {
     const nombre = name.toLocaleLowerCase();
-    const store = localStorage.getItem('ya');
+    const store = localStorage.getItem("ya");
     if (store && store !== nombre) {
       return;
     }
     this.busqueda = true;
-    this.item = this.assignacion.find(item => item.from.toLocaleLowerCase() === nombre);
+    this.item = this.assignacion.find(
+      (item) => item.from.toLocaleLowerCase() === nombre
+    );
     if (this.item) {
-      localStorage.setItem('ya', this.item.from.toLocaleLowerCase());
+      localStorage.setItem("ya", this.item.from.toLocaleLowerCase());
     }
   }
 }

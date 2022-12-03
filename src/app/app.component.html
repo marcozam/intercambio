@@ -1,27 +1,9 @@
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="generar; else mostrar">
-  <!--
-  <div *ngFor="let p of assignacion" class="row"
-    [class.red]="p.from === p.to">
-    <div class="name-box">
-      {{ p.from }}
-    </div>
-    <div class="name-box">
-      {{ p.to }}
-    </div>
-  </div>
-  -->
-  <button (click)="run()">
-    Generar
-  </button>
-</ng-container>
 <ng-template #mostrar>
-  <input #name>
-  <button (click)="descubrir(name.value)">
-    Descubrir
-  </button>
+  <input #name />
+  <button (click)="descubrir(name.value)">Descubrir</button>
   <div *ngIf="busqueda">
-    {{ item ? item.to : 'No encontrado' }}
+    {{ item ? item.to : "No encontrado" }}
   </div>
 </ng-template>
