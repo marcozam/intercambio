@@ -1,1 +1,28 @@
-<p>find works!</p>
+<div *ngIf="!item">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label> ¿Cual es tu nombre? </mat-label>
+      <input
+        matInput
+        #name
+        [matAutocomplete]="auto"
+        [formControl]="myControl"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="descubrir(name.value)">
+    Descubrir
+  </button>
+</div>
+<div *ngIf="item">
+  <p>Es momento de buscar un regalo para:</p>
+  {{ item ? item.to : "No encontrado" }}
+</div>

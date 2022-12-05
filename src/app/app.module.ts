@@ -14,6 +14,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GroupAssignationComponent } from "./group-assignation/group-assignation.component";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { GroupAssignationComponent } from "./group-assignation/group-assignation
     MatInputModule,
     MatIconModule,
     MatListModule,
+    MatAutocompleteModule,
     DragDropModule,
     FormsModule,
     ReactiveFormsModule,

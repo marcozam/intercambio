@@ -65,7 +65,7 @@
     </div>
   </div>
 </div>
-
+<!--
 <div *ngFor="let p of assignacion" class="row" [class.red]="p.from === p.to">
   <div class="name-box">
     {{ p.from }}
@@ -74,4 +74,13 @@
     {{ p.to }}
   </div>
 </div>
-<button mat-raised-button color="primary" (click)="run()">Generar</button>
+-->
+<button mat-raised-button color="primary" (click)="run()">Rifar</button>
+<div>
+  <p>Ahora comparte este link con tus amigos</p>
+  <mat-form-field appearance="fill">
+    <mat-label> Copiar URL </mat-label>
+    <input matInput [ngModel]="url" />
+    <mat-icon matSuffix>content_copy</mat-icon>
+  </mat-form-field>
+</div>
