@@ -40,3 +40,37 @@ $space: 12px;
 .mr {
   margin-right: $space;
 }
+
+.mt {
+  margin-top: $space;
+}
+
+.mb {
+  margin-bottom: $space;
+}
+
+.pl {
+  padding-left: $space;
+}
+
+.pr {
+  padding-right: $space;
+}
+
+.pt {
+  padding-top: $space;
+}
+
+.pb {
+  padding-bottom: $space;
+}
+
+.f-center {
+  display: flex;
+  align-items: center;
+}
+
+.f-end {
+  display: flex;
+  align-items: flex-end;
+}

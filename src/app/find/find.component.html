@@ -21,34 +21,31 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="descubrir(name.value)"
-      >
+      <button mat-raised-button color="primary" (click)="descubrir(name.value)">
         Descubrir
       </button>
     </div>
   </div>
   <div *ngIf="item">
-    <div class="display: flex">
-      <app-gift color="#ffc857" style="margin-right: 10px"></app-gift>
-      <span>
+    <div class="f-center">
+      <app-gift color="#ffc857" class="mr"></app-gift>
+      <span class="pl">
         Es momento de <br />
         buscar un regalo para
       </span>
     </div>
-    <div>
+    <div class="f-end mt pt">
       <h2>
         {{ item ? item.to : "No encontrado" }}
       </h2>
+
+      <app-gift
+        style="margin-left: auto"
+        color="#08bdbd"
+        ribbonColor="#abff4f"
+        size="40"
+      ></app-gift>
+      <app-gift class="ml" color="#7678ed" ribbonColor="#f7b801" size="30"></app-gift>
     </div>
-    <app-gift
-      style="margin-left: auto"
-      color="#08bdbd"
-      ribbonColor="#abff4f"
-      size="40"
-    ></app-gift>
-    <app-gift color="#7678ed" ribbonColor="#f7b801" size="30"></app-gift>
   </div>
 </div>
