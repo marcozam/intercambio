@@ -1,0 +1,44 @@
+<div
+  class="ribbon-container"
+  [style.width.px]="boxTop.width"
+  [style.height.px]="ribbon.height"
+>
+  <div
+    class="ribbon left"
+    [style.borderColor]="ribbonColor"
+    [style.width.px]="ribbon.width"
+    [style.height.px]="ribbon.height"
+  ></div>
+
+  <div
+    class="ribbon right"
+    [style.borderColor]="ribbonColor"
+    [style.width.px]="ribbon.width"
+    [style.height.px]="ribbon.height"
+  ></div>
+</div>
+<div class="box-container" [style.width.px]="boxTop.width">
+  <div
+    class="box-top"
+    [style.backgroundColor]="color"
+    [style.width.px]="boxTop.width"
+    [style.height.px]="boxTop.height"
+  >
+    <ng-container *ngTemplateOutlet="boxRibbon"> </ng-container>
+  </div>
+  <div
+    class="box"
+    [style.backgroundColor]="color"
+    [style.height.px]="size - boxTop.height"
+    [style.width.px]="width"
+  >
+    <ng-container *ngTemplateOutlet="boxRibbon"> </ng-container>
+  </div>
+</div>
+<ng-template #boxRibbon>
+  <div
+    class="box-ribbon"
+    [style.width.px]="size * 0.2"
+    [style.backgroundColor]="ribbonColor"
+  ></div>
+</ng-template>

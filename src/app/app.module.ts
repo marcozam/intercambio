@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GroupAssignationComponent } from "./group-assignation/group-assignation.component";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { GiftComponent } from "./gift/gift.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
     GenerateComponent,
     FindComponent,
     GroupAssignationComponent,
+    GiftComponent,
   ],
   imports: [
     BrowserModule,

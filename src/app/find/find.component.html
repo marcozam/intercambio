@@ -1,28 +1,54 @@
-<div *ngIf="!item">
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label> ¿Cual es tu nombre? </mat-label>
-      <input
-        matInput
-        #name
-        [matAutocomplete]="auto"
-        [formControl]="myControl"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+<div class="gift-container">
+  <div *ngIf="!item">
+    <h1>Descubre quien es tu amigo secreto</h1>
+    <hr />
+    <div class="search-container">
+      <app-gift></app-gift>
+      <mat-form-field class="ml mr" appearance="fill">
+        <mat-label> ¿Cual es tu nombre? </mat-label>
+        <input
+          matInput
+          #name
+          [matAutocomplete]="auto"
+          [formControl]="myControl"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="descubrir(name.value)"
+      >
+        Descubrir
+      </button>
+    </div>
   </div>
-  <button mat-raised-button color="primary" (click)="descubrir(name.value)">
-    Descubrir
-  </button>
-</div>
-<div *ngIf="item">
-  <p>Es momento de buscar un regalo para:</p>
-  {{ item ? item.to : "No encontrado" }}
+  <div *ngIf="item">
+    <div class="display: flex">
+      <app-gift color="#ffc857" style="margin-right: 10px"></app-gift>
+      <span>
+        Es momento de <br />
+        buscar un regalo para
+      </span>
+    </div>
+    <div>
+      <h2>
+        {{ item ? item.to : "No encontrado" }}
+      </h2>
+    </div>
+    <app-gift
+      style="margin-left: auto"
+      color="#08bdbd"
+      ribbonColor="#abff4f"
+      size="40"
+    ></app-gift>
+    <app-gift color="#7678ed" ribbonColor="#f7b801" size="30"></app-gift>
+  </div>
 </div>

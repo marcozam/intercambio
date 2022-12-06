@@ -21,7 +21,7 @@ export class FindComponent implements OnInit {
 
   filteredOptions: Observable<string[]>;
 
-  private readonly storageName = 'ya';
+  private readonly storageName = "ya";
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,7 +35,7 @@ export class FindComponent implements OnInit {
         if (list) {
           const store = localStorage.getItem(this.storageName);
           this.assignacion = this.rifa.desencriptar(list);
-          if(store) {
+          if (store) {
             this.descubrir(store);
           }
           console.log(this.assignacion);
@@ -69,7 +69,10 @@ export class FindComponent implements OnInit {
       (item) => item.from.toLocaleLowerCase() === nombre
     );
     if (this.item) {
-      localStorage.setItem(this.storageName, this.item.from.toLocaleLowerCase());
+      localStorage.setItem(
+        this.storageName,
+        this.item.from.toLocaleLowerCase()
+      );
     }
   }
 }
