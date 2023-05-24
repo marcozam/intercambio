@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <app-share-link label="Invita a tus amigos" section="raffle" [code]="roomUuid"></app-share-link>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-name-selection *ngIf="!(room$ | async)?.uuid; else participants" actionLabel="Unirse" 
+      (action)="joinRoom($event)">
+    </app-name-selection>
+    <ng-template #participants>
+      Participantes
+      <hr/>
+      <div *ngFor="let p of (participants$ | async)">
+        {{ p.name }}
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

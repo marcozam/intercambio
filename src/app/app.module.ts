@@ -6,6 +6,8 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatIconModule } from "@angular/material/icon";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatListModule } from "@angular/material/list";
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from "@angular/material/snack-bar"
 
 import { AppComponent } from "./app.component";
 import { GenerateComponent } from "./generate/generate.component";
@@ -16,6 +18,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { GroupAssignationComponent } from "./group-assignation/group-assignation.component";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { GiftComponent } from "./gift/gift.component";
+import { LandingComponent } from './components/landing/landing.component';
+import { NameSelectionComponent } from './components/name-selection/name-selection.component';
+import { ShareLinkComponent } from './components/share-link/share-link.component';
+import { JoinComponent } from './components/join/join.component';
+import { CreateRoomComponent } from './components/create-room/create-room.component';
+import { LiveRaffleComponent } from './components/live-raffle/live-raffle.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +32,12 @@ import { GiftComponent } from "./gift/gift.component";
     FindComponent,
     GroupAssignationComponent,
     GiftComponent,
+    LandingComponent,
+    NameSelectionComponent,
+    ShareLinkComponent,
+    JoinComponent,
+    CreateRoomComponent,
+    LiveRaffleComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,11 +46,29 @@ import { GiftComponent } from "./gift/gift.component";
     MatInputModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule,
     MatAutocompleteModule,
+    MatCardModule,
     DragDropModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
+      {
+        path: "landing",
+        component: LandingComponent,
+      },
+      {
+        path: "join",
+        component: JoinComponent,
+      },
+      {
+        path: "join/:room",
+        component: JoinComponent,
+      },
+      {
+        path: "raffle/:room",
+        component: LiveRaffleComponent,
+      },
       {
         path: "generate",
         component: GenerateComponent,
@@ -47,7 +79,7 @@ import { GiftComponent } from "./gift/gift.component";
       },
       {
         path: "",
-        redirectTo: "generate",
+        redirectTo: "landing",
         pathMatch: "full",
       },
     ]),

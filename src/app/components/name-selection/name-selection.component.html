@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-label> 
+    {{ label }}
+  </mat-label>
+  <input matInput [(ngModel)]="name" />
+</mat-form-field>
+<button mat-button (click)="emit()" [disabled]="!name">
+  {{ actionLabel }}
+</button>

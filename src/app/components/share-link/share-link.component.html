@@ -1,0 +1,15 @@
+<!--
+<mat-form-field>
+  <mat-label> {{label}} </mat-label>
+  <input matInput [ngModel]="code" readonly />
+  <mat-icon matSuffix (click)="copyToClipboard()">content_copy</mat-icon>
+</mat-form-field>
+-->
+<span>
+  {{ label }}
+</span>
+<button mat-icon-button (click)="copyToClipboard()">
+  <mat-icon>
+    link
+  </mat-icon>
+</button>

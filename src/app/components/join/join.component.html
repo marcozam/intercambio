@@ -1,0 +1,9 @@
+<mat-card *ngIf="roomUuid" class="mb-2">
+  <mat-card-header>
+    Unete al Grupo
+  </mat-card-header>
+  <mat-card-content>
+    <app-name-selection actionLabel="Unirse" (action)="joinRoom($event)">
+    </app-name-selection>
+  </mat-card-content>
+</mat-card>
