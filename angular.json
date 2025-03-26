@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "intercambio:build:production"
+              "buildTarget": "intercambio:build:production"
             },
             "development": {
-              "browserTarget": "intercambio:build:development"
+              "buildTarget": "intercambio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "intercambio:build"
+            "buildTarget": "intercambio:build"
           }
         },
         "test": {
@@ -115,6 +115,5 @@
         }
       }
     }
-  },
-  "defaultProject": "intercambio"
+  }
 }

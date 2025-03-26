@@ -1,5 +1,5 @@
 <!-- PASO 1 -->
-<div>
+<mat-card class="mb-2">
   <mat-form-field appearance="fill">
     <mat-label> ¿Quienes participan? </mat-label>
     <input
@@ -11,20 +11,28 @@
       (matChipInputTokenEnd)="add($event)"
     />
   </mat-form-field>
-</div>
-<mat-chip-list #chipList cdkDropList [cdkDropListData]="participantes">
-  <mat-chip
-    *ngFor="let participante of participantes"
-    cdkDrag
-    (removed)="remove(participante)"
-  >
-    {{ participante }}
+  <mat-chip-list #chipList cdkDropList [cdkDropListData]="participantes">
+    <mat-chip
+      *ngFor="let participante of participantes"
+      cdkDrag
+      (removed)="remove(participante)"
+    >
+      {{ participante }}
+  
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
+</mat-card>
+<mat-card>
+  <div *ngFor="let participante of participantes">
+    <a href="https://wa.me/+5216671424743?text=Confirma!%20https://pro.sbtpb.com">
+      {{ participante }}
+    </a>
+  </div>
+</mat-card>
 
-    <button matChipRemove>
-      <mat-icon>cancel</mat-icon>
-    </button>
-  </mat-chip>
-</mat-chip-list>
 <!-- PASO 2 -->
 <h3>¿Quieres hacer grupos?</h3>
 <p>

@@ -1,0 +1,10 @@
+
+<div class="countdown-timer" *ngIf="(formatedCountDown$ | async) as units">
+  <span class="value minutes">
+    {{units.minutes}} 
+  </span>
+  <span class="value split">:</span>
+  <span class="value seconds">
+    {{units.seconds}} 
+  </span>
+</div>

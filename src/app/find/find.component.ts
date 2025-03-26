@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { UntypedFormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { filter, map, Observable, startWith } from "rxjs";
 import { Asignacion } from "../models";
@@ -17,7 +17,7 @@ export class FindComponent implements OnInit {
 
   item: Asignacion;
 
-  myControl = new FormControl("");
+  myControl = new UntypedFormControl("");
 
   filteredOptions: Observable<string[]>;
 

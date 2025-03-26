@@ -1,0 +1,53 @@
+<div class="login-container">
+  <h2 id="login-heading">Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" aria-labelledby="login-heading">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <mat-icon matPrefix>person</mat-icon>
+      <input 
+        matInput 
+        type="text" 
+        id="username" 
+        formControlName="username" 
+        required 
+        aria-required="true"
+      >
+      <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+        Username is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <mat-icon matPrefix>lock</mat-icon>
+      <input 
+        matInput 
+        type="password" 
+        id="password" 
+        formControlName="password" 
+        required 
+        aria-required="true"
+      >
+      <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Password is required.
+      </mat-error>
+    </mat-form-field>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit" 
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message" role="alert" aria-live="polite">
+    <mat-icon>error</mat-icon>
+    {{ errorMessage }}
+  </div>
+  <div class="forgot-links">
+    Forgot
+    <a routerLink="/auth/forgot-username">username</a>
+    or
+    <a routerLink="/auth/forgot-password">password</a>?
+  </div>
+</div>

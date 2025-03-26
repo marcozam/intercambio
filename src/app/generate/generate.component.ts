@@ -6,9 +6,9 @@ import {
   ViewChildren,
 } from "@angular/core";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { FormControl } from "@angular/forms";
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
-import { MatChipInputEvent } from "@angular/material/chips";
+import { UntypedFormControl } from "@angular/forms";
+import { MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from "@angular/material/legacy-autocomplete";
+import { MatLegacyChipInputEvent as MatChipInputEvent } from "@angular/material/legacy-chips";
 import { Asignacion, Grupo } from "../models";
 import {
   CdkDragDrop,
@@ -82,7 +82,7 @@ export class GenerateComponent implements OnInit {
   }
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  nombreParticipanteCtrl = new FormControl();
+  nombreParticipanteCtrl = new UntypedFormControl();
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || "").trim();
