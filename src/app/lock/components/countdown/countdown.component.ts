@@ -17,12 +17,17 @@ countDown$: Observable<number>;
 formatedCountDown$: Observable<countDownUnits>;
 
 @Input() seconds: number;
+@Input() expiration: Date;
+
 
 ngOnChanges(changes: SimpleChanges) {
-  const { seconds } = changes;
+  const { seconds, expiration } = changes;
   if(seconds) {
-    console.log('Seconds changed')
     this.startCountdown(this.seconds);
+  }
+  if(expiration) {
+    const sec: number = Math.floor((this.expiration.getTime() - new Date().getTime()) / 1000);
+    this.startCountdown(sec);
   }
 }
 

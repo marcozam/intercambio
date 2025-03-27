@@ -1,0 +1,19 @@
+:host {
+  display: flex; 
+  justify-content: space-between;
+  gap: 5px; // Espaciado entre las cajas
+  span {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.35rem;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+}

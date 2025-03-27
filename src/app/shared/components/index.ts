@@ -1,0 +1,1 @@
+export * from './generic-confirmation-modal/generic-confirmation-modal.component';

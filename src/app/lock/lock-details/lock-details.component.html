@@ -1,46 +1,73 @@
-<mat-card class="mb-2" appearance="outlined">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>{{lock.uuid}}</mat-card-title>
-      <mat-card-subtitle>{{lock.model}}</mat-card-subtitle>
-    </mat-card-title-group>
-    <div fxFlex></div>
-    <button mat-icon-button>
-      <mat-icon>settings</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-card-content>
-    <div>
-      Status: 
-      <mat-icon> {{ statusIconMapping[lock.status] }}</mat-icon>
-      {{ lock.status }}
-    </div>
-    <div>
-      <p *ngIf="otpCode$">{{labels.otp}}: {{ otpCode$ | async }}</p>
-      <app-countdown [seconds]="this.expirationTimeControl.value * 60"></app-countdown>
-    </div>
+<div class="card-container" [class.flipped]="isFlipped">
+  <!-- Front Side -->
+  <div class="card-front">
+    <mat-card class="mb-2" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{ lock.uuid }}</mat-card-title>
+          <mat-card-subtitle>{{ lock.model }}</mat-card-subtitle>
+        </mat-card-title-group>
+        <div fxFlex></div>
+        <button mat-icon-button (click)="flipCard()" [hidden]="true">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="mb mt">
+          Status: 
+          <mat-icon>{{ statusIconMapping[lock.status] }}</mat-icon>
+          {{ lock.status }}
+        </div>
+        <div class="otp-container mt" *ngIf="(otpCode$ | async) as otpResponse">
+          <hr/>
+          <div class="mb f-end">
+            <span style="font-size: 1rem;">
+              {{ labels.remainingTime }}:
+            </span>
+            <app-countdown [expiration]="otpResponse.expiration"></app-countdown>
+          </div>
+          <app-otp-display [otpCode]="otpResponse.otp" class="mb mt"></app-otp-display>
+          <app-share-code [code]="otpResponse.otp" [labels]="labels.share"></app-share-code>
+          <hr/>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button (click)="generateOtp()" class="mr">
+          <mat-icon>password</mat-icon>
+          {{ labels.genarateButton }}
+        </button>
+        <button mat-raised-button [hidden]="true">
+          <mat-icon>auto_stories</mat-icon>
+          {{ labels.viewLogsButton }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
-    <!--
-    <mat-button-toggle-group [formControl]="expirationTimeControl" hideSingleSelectionIndicator="false" aria-label="Tiempo de expiracion">
-      <mat-button-toggle *ngFor="let t of expirationTimeFrame" [value]="t.value">
-        {{ t.label }}
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-    -->
-
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button (click)="generateOtp()" class="mr">
-      <mat-icon>
-        password
-      </mat-icon>
-      {{ labels.genarateButton }}
-    </button>
-    <button mat-raised-button>
-      <mat-icon>
-        auto_stories
-      </mat-icon>
-      {{ labels.viewLogsButton }}
-    </button>
-  </mat-card-actions>
-</mat-card>
+  <!-- Back Side -->
+  <div class="card-back">
+    <mat-card class="mb-2" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{ lock.uuid }}</mat-card-title>
+          <mat-card-subtitle>{{ lock.model }}</mat-card-subtitle>
+        </mat-card-title-group>
+        <div fxFlex></div>
+        <button mat-icon-button (click)="flipCard()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline">
+          <mat-label>OTP Duration (minutes)</mat-label>
+          <input matInput type="number" [formControl]="expirationTimeControl">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="saveSettings()">
+          Save
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

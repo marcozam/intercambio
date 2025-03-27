@@ -25,7 +25,6 @@ import { JoinComponent } from './components/join/join.component';
 import { CreateRoomComponent } from './components/create-room/create-room.component';
 import { LiveRaffleComponent } from './components/live-raffle/live-raffle.component';
 import { EmbarazoComponent } from './embarazo/embarazo.component';
-import { TestComponent } from './test/test.component';
 import { LocksComponent } from "./lock/locks/locks.component";
 import { LockDetailsComponent } from "./lock/lock-details/lock-details.component";
 import { LockModule } from "./lock/lock.module";
@@ -45,8 +44,7 @@ import { OAuthInterceptor } from "src/auth/services";
     JoinComponent,
     CreateRoomComponent,
     LiveRaffleComponent,
-    EmbarazoComponent,
-    TestComponent,
+    EmbarazoComponent
   ],
   imports: [
     BrowserModule,

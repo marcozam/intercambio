@@ -1,5 +1,6 @@
 export interface OTPResponse {
-  otp: string
+  otp: string;
+  expiration: Date;
 }
 
 export interface Device {
