@@ -7,8 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { LoginComponent, ForgotUsernameComponent, ForgotPasswordComponent } from './components';
+import { LoginComponent, ForgotUsernameComponent, ForgotPasswordComponent, RegisterComponent } from './components';
 import { LoginService } from './services';
 // import { OAuthInterceptor } from './oauth.interceptor';
 
@@ -16,7 +17,8 @@ import { LoginService } from './services';
   declarations: [
     LoginComponent,
     ForgotUsernameComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -27,10 +29,12 @@ import { LoginService } from './services';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
     RouterModule.forChild([
       { path: '', component: LoginComponent },
       { path: 'forgot-username', component: ForgotUsernameComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent }
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'register', component: RegisterComponent }
     ]),
   ],
   providers: [

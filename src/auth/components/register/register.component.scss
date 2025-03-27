@@ -1,0 +1,32 @@
+@import '../login/login.component.scss';
+
+.register-container {
+  @extend .shared-styles;
+}
+
+form {
+  @extend .shared-form;
+}
+
+button {
+  @extend .shared-button;
+}
+
+.error-message {
+  @extend .shared-error-message;
+}
+
+.link-container {
+  margin-top: 16px;
+  text-align: center;
+
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
