@@ -1,0 +1,29 @@
+<mat-card class="mb-2">
+  <mat-form-field>
+    <mat-label> Nombre </mat-label>
+    <input
+      matInput
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label> Semanas de Gestacion </mat-label>
+    <input
+      type="number"
+      min="1"
+      max="41"
+      matInput
+      [formControl]="semanasEmbarazoCtrl"
+    />
+  </mat-form-field>
+  <div>
+    <h3>
+      {{ consulta?.descripcion }}
+    </h3>
+    <ul>
+      <li *ngFor="let est of consulta?.estudios">
+        {{ est.descripcion }}
+      </li>
+    </ul>
+  </div>
+</mat-card>
